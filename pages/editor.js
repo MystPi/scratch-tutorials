@@ -60,7 +60,7 @@ export default function Create({ editing }) {
         mt="xl"
         size="md"
         placeholder="Enter some markdown..."
-        label="Tutorial (MD enabled)"
+        label="Tutorial (Markdown enabled)"
         required
         autosize
         error={body === ''}

@@ -92,7 +92,7 @@ export default function Layout({ children, tab, title }) {
                 borderBottom: 'none',
               }}
             >
-              <Group sx={{ height: '100%' }} px={20}>
+              <Group sx={{ height: '100%' }} px={16}>
                 <NavItem href="/" active={tab === 'home'}>
                   Scratch Tutorials
                 </NavItem>

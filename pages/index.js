@@ -1,23 +1,48 @@
-import { Button, Title, Text, Group, Grid } from '@mantine/core';
+import {
+  Button,
+  Title,
+  Text,
+  Group,
+  Grid,
+  MediaQuery,
+  Box,
+} from '@mantine/core';
 import Link from 'next/link';
+import Image from 'next/image';
 import Layout from 'components/layout';
 
 export default function Home() {
   return (
     <Layout tab="home">
-      <Title>Scratch Tutorials</Title>
-      <Text color="dimmed">
-        Share your knowledge or learn something new with Scratchers worldwide
-      </Text>
-      <Group mt="md">
-        <Link href="/editor" passHref>
-          <Button component="a">Start Creating</Button>
-        </Link>
-        <Link href="/tutorials/explore" passHref>
-          <Button component="a" variant="light">
-            Explore Tutorials
-          </Button>
-        </Link>
+      <Group position="apart">
+        <div>
+          <Title>Scratch Tutorials</Title>
+          <Text color="dimmed">
+            Share your knowledge or learn something new with Scratchers
+            worldwide
+          </Text>
+          <Group mt="md">
+            <Link href="/editor" passHref>
+              <Button component="a">Start Creating</Button>
+            </Link>
+            <Link href="/tutorials/explore" passHref>
+              <Button component="a" variant="light">
+                Explore Tutorials
+              </Button>
+            </Link>
+          </Group>
+        </div>
+        <MediaQuery smallerThan="md" styles={{ display: 'none' }}>
+          {/* Image is wrapped in a Box so that the styles can be applied */}
+          <Box>
+            <Image
+              className="pulse"
+              width="300"
+              height="300"
+              src="/shape.png"
+            />
+          </Box>
+        </MediaQuery>
       </Group>
       <Grid mt="5xl">
         <Grid.Col span={6}>
