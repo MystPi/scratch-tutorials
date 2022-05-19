@@ -36,6 +36,7 @@ export default function Home() {
           {/* Image is wrapped in a Box so that the styles can be applied */}
           <Box>
             <Image
+              alt="orange 3D shape"
               className="pulse"
               width="300"
               height="300"
