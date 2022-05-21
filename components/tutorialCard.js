@@ -4,7 +4,7 @@ import Link from 'next/link';
 export default function TutorialCard({ tutorial }) {
   return (
     <Card shadow="sm" p="lg">
-      <Text weight={500} size="lg" lineClamp={2}>
+      <Text size="lg" lineClamp={2}>
         {tutorial.title}
       </Text>
       <Text color="dimmed" size="xs">
