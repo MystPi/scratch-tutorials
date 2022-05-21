@@ -1,22 +1,45 @@
-import { Title, Group, Button, TextInput, Textarea } from '@mantine/core';
-import { useState } from 'react';
-import Router from 'next/router';
-import { withSessionSsr } from 'lib/withSession';
-import { getTutorial } from 'lib/db';
+import {
+  Title,
+  Group,
+  Button,
+  TextInput,
+  Textarea,
+  Skeleton,
+} from '@mantine/core';
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
+import useTutorial from 'lib/useTutorial';
+import useUser from 'lib/useUser';
 import Markdown from 'components/markdown';
 import Layout from 'components/layout';
 import ErrorDialog from 'components/errorDialog';
 
-export default function Create({ editing }) {
-  const [name, setName] = useState(
-    editing !== false ? editing.title : 'My awesome tutorial'
-  );
-  const [body, setBody] = useState(
-    editing !== false
-      ? editing.contents
-      : 'Write your **awesome** *tutorial* here!'
-  );
+export default function Create() {
+  const router = useRouter();
+  const { user, isLoading: isUserLoading } = useUser({
+    redirectTo: '/api/auth/login',
+  });
+  const { tutorial } = useTutorial(router.query.id);
+  const [editing, setEditing] = useState(false);
+  const [name, setName] = useState('My awesome tutorial');
+  const [body, setBody] = useState('Write your **awesome** *tutorial* here!');
   const [error, setError] = useState(null);
+
+  useEffect(() => {
+    if (user && tutorial && user.username === tutorial.by) {
+      setEditing(tutorial);
+      setName(tutorial.title);
+      setBody(tutorial.contents);
+    }
+  }, [user, tutorial]);
+
+  if (isUserLoading) {
+    return (
+      <Layout title="Editor">
+        <Skeleton width="100%" height="350px" />
+      </Layout>
+    );
+  }
 
   async function handleSubmit(title, contents) {
     const endpoint =
@@ -30,7 +53,7 @@ export default function Create({ editing }) {
     const json = await res.json();
 
     if (res.ok) {
-      Router.push(`/tutorials/id/${json.id}`);
+      router.push(`/tutorials/id/${json.id}`);
     } else {
       setError(json.error);
     }
@@ -73,30 +96,3 @@ export default function Create({ editing }) {
     </Layout>
   );
 }
-
-export const getServerSideProps = withSessionSsr(async ({ req, query }) => {
-  if (req.session.user) {
-    const id = query.id;
-    let editing = false;
-
-    if (id) {
-      const tutorial = await getTutorial(id);
-      if (tutorial && tutorial.by === req.session.user.username) {
-        editing = tutorial;
-      }
-    }
-
-    return {
-      props: {
-        editing,
-      },
-    };
-  } else {
-    return {
-      redirect: {
-        destination: '/api/auth/login',
-        permanent: false,
-      },
-    };
-  }
-});
