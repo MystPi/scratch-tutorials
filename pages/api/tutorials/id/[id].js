@@ -4,7 +4,12 @@ import { getTutorial, updateTutorial, deleteTutorial } from 'lib/db';
 export default withSessionRoute(async (req, res) => {
   if (req.method === 'GET') {
     const tutorial = await getTutorial(req.query.id);
-    res.json(tutorial);
+
+    if (tutorial) {
+      res.json(tutorial);
+    } else {
+      res.status(404).json({ error: 'Tutorial not found' });
+    }
   } else if (req.method === 'PUT' || req.method === 'DELETE') {
     if (!req.session.user) {
       return res

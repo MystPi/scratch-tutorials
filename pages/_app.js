@@ -9,7 +9,18 @@ export default function App(props) {
   return (
     <SWRConfig
       value={{
-        fetcher: (...args) => fetch(...args).then((res) => res.json()),
+        fetcher: async (...args) => {
+          const res = await fetch(...args);
+
+          if (!res.ok) {
+            const error = new Error('An error occured while fetching data');
+            error.info = await res.json();
+            error.status = res.status;
+            throw error;
+          }
+
+          return res.json();
+        },
       }}
     >
       <MantineProvider

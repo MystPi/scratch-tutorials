@@ -1,15 +1,36 @@
-import { Title, Text, Group, Button, Anchor } from '@mantine/core';
+import { Title, Text, Group, Button, Anchor, Loader } from '@mantine/core';
 import { useState } from 'react';
 import Link from 'next/link';
-import Router from 'next/router';
-import { getTutorial } from 'lib/db';
-import { withSessionSsr } from 'lib/withSession';
+import { useRouter } from 'next/router';
+import useTutorial from 'lib/useTutorial';
+import useUser from 'lib/useUser';
 import Layout from 'components/layout';
 import Markdown from 'components/markdown';
 import ErrorDialog from 'components/errorDialog';
 
-export default function Tutorial({ tutorial, user }) {
+export default function Tutorial() {
+  const router = useRouter();
   const [error, setError] = useState(null);
+  const { user } = useUser();
+  const { tutorial, isLoading, isError } = useTutorial(router.query.id);
+
+  if (isLoading) {
+    return (
+      <Layout title="Loading">
+        <Loader />
+      </Layout>
+    );
+  }
+
+  if (isError) {
+    return (
+      <Layout title={isError.status}>
+        <Title align="center">
+          {isError.status} - {isError.info.error}
+        </Title>
+      </Layout>
+    );
+  }
 
   async function deleteTutorial() {
     const endpoint = `/api/tutorials/id/${tutorial.id}`;
@@ -17,7 +38,7 @@ export default function Tutorial({ tutorial, user }) {
     const json = await res.json();
 
     if (res.ok) {
-      Router.push(`/tutorials/user/${user?.username}`);
+      router.push(`/tutorials/user/${user?.username}`);
     } else {
       setError(json.error);
     }
@@ -51,20 +72,3 @@ export default function Tutorial({ tutorial, user }) {
     </Layout>
   );
 }
-
-export const getServerSideProps = withSessionSsr(async ({ req, params }) => {
-  const tutorial = await getTutorial(params.id);
-
-  if (tutorial) {
-    return {
-      props: {
-        tutorial,
-        user: req.session.user || null,
-      },
-    };
-  } else {
-    return {
-      notFound: true,
-    };
-  }
-});
