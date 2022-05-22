@@ -2,32 +2,21 @@ import { Title, Text, Group, Button, Anchor, Loader } from '@mantine/core';
 import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import useTutorial from 'lib/useTutorial';
 import useUser from 'lib/useUser';
+import { getTutorial } from 'lib/db';
 import Layout from 'components/layout';
 import Markdown from 'components/markdown';
 import ErrorDialog from 'components/errorDialog';
 
-export default function Tutorial() {
+export default function Tutorial({ tutorial }) {
   const router = useRouter();
   const [error, setError] = useState(null);
   const { user } = useUser();
-  const { tutorial, isLoading, isError } = useTutorial(router.query.id);
 
-  if (isLoading) {
+  if (router.isFallback) {
     return (
       <Layout title="Loading">
         <Loader />
-      </Layout>
-    );
-  }
-
-  if (isError) {
-    return (
-      <Layout title={isError.status}>
-        <Title align="center">
-          {isError.status} - {isError.info.error}
-        </Title>
       </Layout>
     );
   }
@@ -71,4 +60,28 @@ export default function Tutorial() {
       <ErrorDialog error={error} />
     </Layout>
   );
+}
+
+export function getStaticPaths() {
+  return {
+    paths: [],
+    fallback: true,
+  };
+}
+
+export async function getStaticProps({ params }) {
+  const tutorial = await getTutorial(params.id);
+
+  if (tutorial) {
+    return {
+      props: {
+        tutorial,
+      },
+      revalidate: 2,
+    };
+  } else {
+    return {
+      notFound: true,
+    };
+  }
 }
