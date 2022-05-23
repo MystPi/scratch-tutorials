@@ -19,6 +19,12 @@ export default function Tutorial() {
   if (Status) return Status;
 
   async function deleteTutorial() {
+    const confirmed = window.confirm(
+      'Are you sure you want to delete this tutorial?'
+    );
+
+    if (!confirmed) return;
+
     const endpoint = `/api/tutorials/id/${tutorial.id}`;
     const res = await fetch(endpoint, { method: 'DELETE' });
     const json = await res.json();
