@@ -1,4 +1,4 @@
-import { Title, Text, Group, Button, Anchor, Loader } from '@mantine/core';
+import { Title, Text, Group, Button, Anchor } from '@mantine/core';
 import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -7,30 +7,16 @@ import useUser from 'lib/useUser';
 import Layout from 'components/layout';
 import Markdown from 'components/markdown';
 import ErrorDialog from 'components/errorDialog';
+import status from 'components/status';
 
 export default function Tutorial() {
   const router = useRouter();
   const [error, setError] = useState(null);
   const { user } = useUser();
   const { tutorial, isLoading, isError } = useTutorial(router.query.id);
+  const Status = status(isLoading, isError);
 
-  if (isLoading) {
-    return (
-      <Layout title="Loading">
-        <Loader />
-      </Layout>
-    );
-  }
-
-  if (isError) {
-    return (
-      <Layout title={isError.status}>
-        <Title align="center">
-          {isError.status} - {isError.info.error}
-        </Title>
-      </Layout>
-    );
-  }
+  if (Status) return Status;
 
   async function deleteTutorial() {
     const endpoint = `/api/tutorials/id/${tutorial.id}`;

@@ -1,9 +1,15 @@
 import { Title, Text } from '@mantine/core';
-import { getAllTutorials } from 'lib/db';
+import { useAll } from 'lib/useTutorial';
 import Layout from 'components/layout';
 import TutorialGroup from 'components/tutorialGroup';
+import status from 'components/status';
 
-export default function Explore({ tutorials }) {
+export default function Explore() {
+  const { tutorials, isLoading, isError } = useAll();
+  const Status = status(isLoading, isError);
+
+  if (Status) return Status;
+
   return (
     <Layout tab="explore" title="Explore">
       <Title>Explore</Title>
@@ -13,15 +19,4 @@ export default function Explore({ tutorials }) {
       <TutorialGroup tutorials={tutorials} />
     </Layout>
   );
-}
-
-export async function getStaticProps() {
-  const tutorials = await getAllTutorials();
-
-  return {
-    props: {
-      tutorials,
-    },
-    revalidate: 2,
-  };
 }

@@ -1,30 +1,22 @@
 import { Title } from '@mantine/core';
-import { getAllTutorialsByUser } from 'lib/db';
+import { useRouter } from 'next/router';
+import useTutorial from 'lib/useTutorial';
 import Layout from 'components/layout';
 import TutorialGroup from 'components/tutorialGroup';
+import status from 'components/status';
 
-export default function UserTutorials({ user, tutorials }) {
+export default function UserTutorials() {
+  const router = useRouter();
+  const user = router.query.user;
+  const { tutorial: tutorials, isLoading, isError } = useTutorial(user, true);
+  const Status = status(isLoading, isError);
+
+  if (Status) return Status;
+
   return (
     <Layout title={`Tutorials by ${user}`}>
       <Title mb="xl">Tutorials by {user}</Title>
       <TutorialGroup tutorials={tutorials} />
     </Layout>
   );
-}
-
-export async function getServerSideProps({ params }) {
-  const tutorials = await getAllTutorialsByUser(params.user);
-
-  if (tutorials) {
-    return {
-      props: {
-        tutorials,
-        user: params.user,
-      },
-    };
-  } else {
-    return {
-      notFound: true,
-    };
-  }
 }
