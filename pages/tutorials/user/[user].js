@@ -9,7 +9,7 @@ export default function UserTutorials() {
   const router = useRouter();
   const user = router.query.user;
   const { tutorial: tutorials, isLoading, isError } = useTutorial(user, true);
-  const Status = status(isLoading, isError);
+  const Status = status(`Tutorials by a User`, isLoading, isError);
 
   if (Status) return Status;
 

@@ -1,11 +1,13 @@
-import { Title, Loader } from '@mantine/core';
+import { Title, Loader, Center } from '@mantine/core';
 import Layout from 'components/layout';
 
-export default function status(loading, error) {
+export default function status(title, loading, error) {
   if (loading) {
     return (
-      <Layout title="Loading">
-        <Loader />
+      <Layout title={title}>
+        <Center>
+          <Loader />
+        </Center>
       </Layout>
     );
   }

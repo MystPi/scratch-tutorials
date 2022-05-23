@@ -14,7 +14,7 @@ export default function Tutorial() {
   const [error, setError] = useState(null);
   const { user } = useUser();
   const { tutorial, isLoading, isError } = useTutorial(router.query.id);
-  const Status = status(isLoading, isError);
+  const Status = status('View a Tutorial', isLoading, isError);
 
   if (Status) return Status;
 

@@ -6,7 +6,7 @@ import status from 'components/status';
 
 export default function Explore() {
   const { tutorials, isLoading, isError } = useAll();
-  const Status = status(isLoading, isError);
+  const Status = status('Explore', isLoading, isError);
 
   if (Status) return Status;
 
