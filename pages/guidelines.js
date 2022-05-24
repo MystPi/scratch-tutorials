@@ -36,6 +36,11 @@ export default function Guidelines() {
           </a>
           .
         </p>
+        <h2>Tutorials must be related to Scratch in some way</h2>
+        <p>
+          Please don't submit off-topic tutorials that aren't related to Scratch
+          in any way. This is <b>Scratch</b> Tutorials after all.
+        </p>
         <h2>
           If you see an inappropriate, or otherwise unfit, tutorial, contact{' '}
           <a
