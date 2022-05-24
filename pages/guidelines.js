@@ -14,6 +14,7 @@ export default function Guidelines() {
           <a
             href="https://scratch.mit.edu/community_guidelines"
             target="_blank"
+            rel="noreferrer"
           >
             Scratch's Community Guidelines
           </a>
@@ -29,6 +30,7 @@ export default function Guidelines() {
           <a
             href="https://scratch.mit.edu/users/NFlex23#comments"
             target="_blank"
+            rel="noreferrer"
           >
             the creator on Scratch
           </a>
@@ -39,6 +41,7 @@ export default function Guidelines() {
           <a
             href="https://scratch.mit.edu/users/NFlex23#comments"
             target="_blank"
+            rel="noreferrer"
           >
             the creator
           </a>{' '}
