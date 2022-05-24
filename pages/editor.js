@@ -1,10 +1,13 @@
 import {
   Title,
+  Text,
+  Anchor,
   Group,
   Button,
   TextInput,
   Textarea,
   Skeleton,
+  Modal,
 } from '@mantine/core';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
@@ -21,6 +24,7 @@ export default function Create() {
   });
   const { tutorial } = useTutorial(router.query.id);
   const [editing, setEditing] = useState(false);
+  const [opened, setOpened] = useState(false);
   const [name, setName] = useState('My awesome tutorial');
   const [body, setBody] = useState('Write your **awesome** *tutorial* here!');
   const [error, setError] = useState(null);
@@ -61,13 +65,30 @@ export default function Create() {
 
   return (
     <Layout title="Editor">
+      <Modal
+        title="Important:"
+        opened={opened}
+        onClose={() => setOpened(false)}
+      >
+        <Text>
+          Please read the{' '}
+          <Anchor href="/guidelines" target="_blank">
+            guidelines
+          </Anchor>{' '}
+          before submitting your tutorial! Any tutorials not following them will
+          be removed ASAP!
+        </Text>
+        <Button mt="md" onClick={() => handleSubmit(name, body)}>
+          I understand, submit tutorial
+        </Button>
+      </Modal>
       <Group position="apart">
         <Title>
           {editing !== false
             ? `Edit tutorial #${editing.id}`
             : 'Create a new tutorial'}
         </Title>
-        <Button onClick={() => handleSubmit(name, body)}>Submit</Button>
+        <Button onClick={() => setOpened(true)}>Submit</Button>
       </Group>
       <TextInput
         mt="xl"
