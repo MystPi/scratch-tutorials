@@ -79,7 +79,7 @@ export default function Create() {
           .
         </Text>
         <Button mt="md" onClick={() => handleSubmit(name, body)}>
-          I understand; {editing ? 'edit my' : 'submit my'} tutorial
+          I understand; {editing ? 'edit' : 'submit'} this tutorial
         </Button>
       </Modal>
       <Group position="apart">
