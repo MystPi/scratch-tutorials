@@ -65,21 +65,21 @@ export default function Create() {
 
   return (
     <Layout title="Editor">
-      <Modal
-        title="Important:"
-        opened={opened}
-        onClose={() => setOpened(false)}
-      >
+      <Modal title="Heads up:" opened={opened} onClose={() => setOpened(false)}>
         <Text>
-          Please read the{' '}
+          To keep Scratch Tutorials a safe place for everyone, please read the{' '}
           <Anchor href="/guidelines" target="_blank">
             guidelines
           </Anchor>{' '}
           before submitting your tutorial! Any tutorials not following them will
-          be removed ASAP!
+          be removed or edited by{' '}
+          <Anchor href="/mods" target="_blank">
+            moderators
+          </Anchor>
+          .
         </Text>
         <Button mt="md" onClick={() => handleSubmit(name, body)}>
-          I understand, submit tutorial
+          I understand; {editing ? 'edit my' : 'submit my'} tutorial
         </Button>
       </Modal>
       <Group position="apart">

@@ -11,6 +11,20 @@ export default function Guidelines() {
       </Text>
       <TypographyStylesProvider>
         <h2>
+          If you find a tutorial violating the guidelines below, please contact{' '}
+          <Link href="/mods">
+            <a>a moderator</a>
+          </Link>{' '}
+          right away
+        </h2>
+        <p>
+          They will try to fix or delete the tutorial as fast as they can; don't
+          worry!
+        </p>
+
+        <hr />
+
+        <h2>
           All tutorials must conform to{' '}
           <a
             href="https://scratch.mit.edu/community_guidelines"
@@ -42,13 +56,6 @@ export default function Guidelines() {
           Please don't submit off-topic tutorials that aren't related to Scratch
           in any way. This is <b>Scratch</b> Tutorials after all.
         </p>
-        <h2>
-          If you see an inappropriate, or otherwise unfit, tutorial, contact{' '}
-          <Link href="/mods">
-            <a>a moderator</a>
-          </Link>{' '}
-          right away
-        </h2>
         <h2>
           If you continue to break the guidelines, you <i>will</i> be banned
           from using Scratch Tutorials!
