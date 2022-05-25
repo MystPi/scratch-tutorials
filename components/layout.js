@@ -44,8 +44,11 @@ export default function Layout({ children, tab, title }) {
 
   const navButtons = (
     <Group sx={{ flex: 1 }}>
-      <NavItem href="/tutorials/explore" active={tab === 'explore'} mr="auto">
+      <NavItem href="/tutorials/explore" active={tab === 'explore'}>
         Explore
+      </NavItem>
+      <NavItem href="/guidelines" active={tab === 'guidelines'} mr="auto">
+        Guidelines
       </NavItem>
       {isLoading === true && <Skeleton width={225} height={36} />}
       {user?.isLoggedIn === true && (

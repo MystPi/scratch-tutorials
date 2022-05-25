@@ -1,4 +1,5 @@
 import { Title, Text, TypographyStylesProvider } from '@mantine/core';
+import Link from 'next/link';
 import Layout from 'components/layout';
 
 export default function Guidelines() {
@@ -43,19 +44,20 @@ export default function Guidelines() {
         </p>
         <h2>
           If you see an inappropriate, or otherwise unfit, tutorial, contact{' '}
-          <a
-            href="https://scratch.mit.edu/users/NFlex23#comments"
-            target="_blank"
-            rel="noreferrer"
-          >
-            the creator
-          </a>{' '}
+          <Link href="/mods">
+            <a>a moderator</a>
+          </Link>{' '}
           right away
         </h2>
         <h2>
           If you continue to break the guidelines, you <i>will</i> be banned
           from using Scratch Tutorials!
         </h2>
+        <p>
+          We want this site to be a safe place for everyone. If you continually
+          violate these guidelines, you will be banned from using Scratch
+          Tutorials. This includes creating, editing, and viewing tutorials.
+        </p>
       </TypographyStylesProvider>
     </Layout>
   );
