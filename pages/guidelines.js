@@ -36,9 +36,9 @@ export default function Guidelines() {
         </h2>
         <p>
           Since this site is used by Scratchers, it must be safe for them.
-          Anything that goes against the CGs will be removed ASAP.
+          Anything that goes against the CGs will be removed.
         </p>
-        <h2>Tutorials must actually be tutorials, not anything else</h2>
+        <h2>Tutorials must be tutorials, nothing else</h2>
         <p>
           If you're unsure about whether or not it's okay to submit something,
           feel free to contact{' '}
@@ -47,7 +47,7 @@ export default function Guidelines() {
             target="_blank"
             rel="noreferrer"
           >
-            the creator on Scratch
+            the Scratch Tutorials creator on Scratch
           </a>
           .
         </p>
@@ -61,8 +61,8 @@ export default function Guidelines() {
           from using Scratch Tutorials!
         </h2>
         <p>
-          We want this site to be a safe place for everyone. If you continually
-          violate these guidelines, you will be banned from using Scratch
+          We want this site to be safe for everyone. If you continue to
+          violate these guidelines, you <i>will</i> be banned from using Scratch
           Tutorials. This includes creating, editing, and viewing tutorials.
         </p>
       </TypographyStylesProvider>
