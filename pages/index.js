@@ -10,6 +10,7 @@ import {
 import Link from 'next/link';
 import Image from 'next/image';
 import Layout from 'components/layout';
+import styles from 'styles/index.module.css';
 
 export default function Home() {
   return (
@@ -37,7 +38,7 @@ export default function Home() {
           <Box>
             <Image
               alt="orange 3D shape"
-              className="pulse"
+              className={styles.pulse}
               width="300"
               height="300"
               src="/shape.png"

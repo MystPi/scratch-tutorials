@@ -9,11 +9,14 @@ import {
   MediaQuery,
   Burger,
   Collapse,
+  ActionIcon,
+  useMantineColorScheme,
 } from '@mantine/core';
 import { useState } from 'react';
 import Link from 'next/link';
 import Head from 'next/head';
 import useUser from 'lib/useUser';
+import { FiSun, FiMoon } from 'react-icons/fi';
 
 function NavItem({ children, href, active, ...props }) {
   if (active)
@@ -41,6 +44,8 @@ async function signOut(mutateUser) {
 export default function Layout({ children, tab, title }) {
   const { user, isLoading, mutateUser } = useUser();
   const [opened, setOpened] = useState(false);
+  const { colorScheme, toggleColorScheme } = useMantineColorScheme();
+  const dark = colorScheme === 'dark';
 
   const navButtons = (
     <Group sx={{ flex: 1 }}>
@@ -74,6 +79,15 @@ export default function Layout({ children, tab, title }) {
           </Button>
         </Link>
       )}
+      <ActionIcon
+        variant="outline"
+        color="yellow"
+        onClick={() => toggleColorScheme()}
+        title="Toggle color scheme"
+        size="lg"
+      >
+        {dark ? <FiSun /> : <FiMoon />}
+      </ActionIcon>
     </Group>
   );
 
