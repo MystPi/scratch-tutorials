@@ -18,6 +18,7 @@ export default function Moderators() {
               <a
                 href={`https://scratch.mit.edu/users/${mod}#comments`}
                 target="_blank"
+                rel="noreferrer"
               >
                 {mod}
               </a>
