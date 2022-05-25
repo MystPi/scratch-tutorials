@@ -2,7 +2,7 @@ import { Title, Text, TypographyStylesProvider } from '@mantine/core';
 import Layout from 'components/layout';
 
 export default function Moderators() {
-  const mods = ['NFlex23', 'Chiroyce'];
+  const mods = ['NFlex23', 'Chiroyce', 'Lockstart'];
 
   return (
     <Layout title="Moderators">
