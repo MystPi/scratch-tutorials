@@ -30,7 +30,7 @@ export default function Create() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    if (user && tutorial && user.username === tutorial.by) {
+    if (user && tutorial && (user.username === tutorial.by || user.isMod)) {
       setEditing(tutorial);
       setName(tutorial.title);
       setBody(tutorial.contents);

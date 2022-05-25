@@ -19,7 +19,7 @@ export default withSessionRoute(async (req, res) => {
 
     const tutorial = await getTutorial(req.query.id);
 
-    if (req.session.user.username !== tutorial.by) {
+    if (req.session.user.username !== tutorial.by && !req.session.user.isMod) {
       return res
         .status(403)
         .json({ error: 'You do not have permission to edit this tutorial' });

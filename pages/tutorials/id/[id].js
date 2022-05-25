@@ -40,7 +40,7 @@ export default function Tutorial() {
     <Layout title={tutorial.title}>
       <Group>
         <Title mr="auto">{tutorial.title}</Title>
-        {tutorial.by === user?.username && (
+        {(tutorial.by === user?.username || user?.isMod) && (
           <>
             <Link href={`/editor?id=${tutorial.id}`} passHref>
               <Button component="a" variant="light">

@@ -14,9 +14,11 @@ export default withSessionRoute(async (req, res) => {
     );
     const scratchUserData = await scratchUserResponse.json();
     const username = scratchUserData.username;
+    const isMod = process.env.MODS.split(',').includes(username);
 
     req.session.user = {
       username,
+      isMod,
     };
 
     await req.session.save();

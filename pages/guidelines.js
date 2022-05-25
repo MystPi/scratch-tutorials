@@ -52,6 +52,10 @@ export default function Guidelines() {
           </a>{' '}
           right away
         </h2>
+        <h2>
+          If you continue to break the guidelines, you <i>will</i> be banned
+          from using Scratch Tutorials!
+        </h2>
       </TypographyStylesProvider>
     </Layout>
   );
