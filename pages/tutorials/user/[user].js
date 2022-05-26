@@ -1,13 +1,13 @@
 import { Title, Loader } from '@mantine/core';
 import { useRouter } from 'next/router';
-import useTutorial from 'lib/useTutorial';
+import { useUserTutorials } from 'lib/useTutorial';
 import Layout from 'components/layout';
 import TutorialGroup from 'components/tutorialGroup';
 
 export default function UserTutorials() {
   const router = useRouter();
   const user = router.query.user;
-  const { tutorial: tutorials, isLoading, isError } = useTutorial(user, true);
+  const { tutorials, isLoading, isError } = useUserTutorials(user);
   let content;
 
   if (isLoading || isError) {

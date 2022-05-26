@@ -2,7 +2,7 @@ import { Title, Text, Group, Button, Anchor, Loader } from '@mantine/core';
 import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import useTutorial from 'lib/useTutorial';
+import { useTutorial } from 'lib/useTutorial';
 import useUser from 'lib/useUser';
 import Layout from 'components/layout';
 import Markdown from 'components/markdown';

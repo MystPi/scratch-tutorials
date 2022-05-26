@@ -11,7 +11,7 @@ import {
 } from '@mantine/core';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import useTutorial from 'lib/useTutorial';
+import { useTutorial } from 'lib/useTutorial';
 import useUser from 'lib/useUser';
 import Markdown from 'components/markdown';
 import Layout from 'components/layout';
