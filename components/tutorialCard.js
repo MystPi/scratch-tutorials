@@ -1,24 +1,25 @@
 import { Card, Group, Button, Text, Anchor } from '@mantine/core';
 import Link from 'next/link';
+import { useRef } from 'react';
+
+const colors = [
+  'gray',
+  'red',
+  'pink',
+  'grape',
+  'violet',
+  'indigo',
+  'blue',
+  'cyan',
+  'teal',
+  'green',
+  'lime',
+  'yellow',
+  'orange',
+];
 
 export default function TutorialCard({ tutorial }) {
-  const colors = [
-    'gray',
-    'red',
-    'pink',
-    'grape',
-    'violet',
-    'indigo',
-    'blue',
-    'cyan',
-    'teal',
-    'green',
-    'lime',
-    'yellow',
-    'orange',
-  ];
-
-  const randomColor = colors[Math.floor(Math.random() * colors.length)];
+  const randomColor = useRef(colors[Math.floor(Math.random() * colors.length)]);
 
   return (
     <Card shadow="sm" p="lg" sx={{ height: '100%' }}>
@@ -42,7 +43,7 @@ export default function TutorialCard({ tutorial }) {
           {tutorial.contents.slice(0, 800)}
         </Text>
         <Link href={`/tutorials/id/${tutorial.id}`} passHref>
-          <Button color={randomColor} mt="auto" component="a" fullWidth>
+          <Button color={randomColor.current} mt="auto" component="a" fullWidth>
             View
           </Button>
         </Link>
