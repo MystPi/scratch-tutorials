@@ -1,4 +1,4 @@
-import { Title, Text, TextInput, Grid, Alert } from '@mantine/core';
+import { Title, Text, TextInput, Grid, Alert, Select } from '@mantine/core';
 import { useState } from 'react';
 import { useAll } from 'lib/useTutorial';
 import Layout from 'components/layout';
@@ -39,6 +39,7 @@ function SearchInput({ onSearch }) {
 
 export default function Explore() {
   const [search, setSearch] = useState('');
+  const [sort, setSort] = useState('new');
   const { tutorials, isLoading, isError } = useAll();
   const Status = status('Explore', isLoading, isError);
 
@@ -53,15 +54,26 @@ export default function Explore() {
   return (
     <Layout tab="explore" title="Explore">
       <Grid align="center" mb="xl">
-        <Grid.Col md={8}>
+        <Grid.Col md={6}>
           <Title>Explore</Title>
           <Text color="dimmed">Find new and exciting tutorials!</Text>
         </Grid.Col>
         <Grid.Col md={4}>
           <SearchInput onSearch={(value) => setSearch(value)} />
         </Grid.Col>
+        <Grid.Col md={2}>
+          <Select
+            aria-label="Sort"
+            data={[
+              { value: 'new', label: 'New to old' },
+              { value: 'old', label: 'Old to new' },
+            ]}
+            value={sort}
+            onChange={setSort}
+          />
+        </Grid.Col>
       </Grid>
-      <TutorialGroup tutorials={searched} />
+      <TutorialGroup tutorials={searched} sort={sort} />
       {searched.length === 0 && (
         <Alert
           sx={{ width: 'fit-content' }}
