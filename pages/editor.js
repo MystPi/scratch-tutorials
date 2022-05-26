@@ -115,12 +115,17 @@ export default function Create() {
       <Markdown value={body} />
       <ErrorDialog error={error} />
       <Text>
-      Quick markdown guide:
-      Each # makes the heading smaller
-      # Makes a heading
-      **text** makes the text <b>bold</b>
-      *text* makes the text <i>italic</i>
-      To display an image write [!description](https://url/to/image)
+        Quick markdown guide:
+        <br></br>
+        Each # makes the heading smaller
+        <br></br>
+        # Makes a heading
+        <br></br>
+        **text** makes the text <b>bold</b>
+        <br></br>
+        *text* makes the text <i>italic</i>
+        <br></br>
+        To display an image write [!description](https://url/to/image)
       </Text>
     </Layout>
   );
