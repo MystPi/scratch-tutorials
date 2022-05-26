@@ -1,8 +1,14 @@
-import { getAllTutorials } from 'lib/db';
+import { getAllTutorials, paginateTutorials } from 'lib/db';
 
 export default async function handle(req, res) {
   if (req.method === 'GET') {
-    const tutorials = await getAllTutorials();
+    let tutorials;
+
+    if (req.query.page) {
+      tutorials = await paginateTutorials(req.query.page);
+    } else {
+      tutorials = await getAllTutorials();
+    }
 
     res.json(tutorials);
   } else {

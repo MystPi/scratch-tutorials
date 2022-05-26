@@ -1,9 +1,16 @@
-import { Title, Text, TextInput, Grid, Alert, Select } from '@mantine/core';
+import {
+  Title,
+  Text,
+  TextInput,
+  Grid,
+  Alert,
+  Select,
+  Loader,
+} from '@mantine/core';
 import { useState } from 'react';
 import { useAll } from 'lib/useTutorial';
 import Layout from 'components/layout';
 import TutorialGroup from 'components/tutorialGroup';
-import status from 'components/status';
 import { FiSearch, FiX, FiInfo } from 'react-icons/fi';
 
 function SearchInput({ onSearch }) {
@@ -41,15 +48,18 @@ export default function Explore() {
   const [search, setSearch] = useState('');
   const [sort, setSort] = useState('new');
   const { tutorials, isLoading, isError } = useAll();
-  const Status = status('Explore', isLoading, isError);
+  let content, searched;
 
-  if (Status) return Status;
-
-  const searched = tutorials.filter(
-    (t) =>
-      t.title.toLowerCase().includes(search.toLowerCase()) ||
-      t.by.toLowerCase().includes(search.toLowerCase())
-  );
+  if (isLoading || isError) {
+    content = <Loader />;
+  } else {
+    searched = tutorials.filter(
+      (t) =>
+        t.title.toLowerCase().includes(search.toLowerCase()) ||
+        t.by.toLowerCase().includes(search.toLowerCase())
+    );
+    content = <TutorialGroup tutorials={searched} sort={sort} />;
+  }
 
   return (
     <Layout tab="explore" title="Explore">
@@ -73,8 +83,8 @@ export default function Explore() {
           />
         </Grid.Col>
       </Grid>
-      <TutorialGroup tutorials={searched} sort={sort} />
-      {searched.length === 0 && (
+      {content}
+      {tutorials && searched.length === 0 && (
         <Alert
           sx={{ width: 'fit-content' }}
           mx="auto"
