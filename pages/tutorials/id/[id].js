@@ -16,7 +16,7 @@ export default function Tutorial() {
 
   if (isLoading || isError) {
     return (
-      <Layout title={`Tutorial ${router.query.id}`}>
+      <Layout title={`View a Tutorial`}>
         <Loader />
       </Layout>
     );
