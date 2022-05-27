@@ -2,7 +2,12 @@ import { getAllTutorialsByUser } from 'lib/db';
 
 export default async function handle(req, res) {
   if (req.method === 'GET') {
-    const tutorials = await getAllTutorialsByUser(req.query.user);
+    const tutorials = await getAllTutorialsByUser(
+      req.query.user,
+      req.query.page,
+      req.query.sort,
+      req.query.search
+    );
 
     if (tutorials) {
       res.json(tutorials);

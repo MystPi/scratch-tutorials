@@ -47,18 +47,21 @@ function SearchInput({ onSearch }) {
 export default function Explore() {
   const [search, setSearch] = useState('');
   const [sort, setSort] = useState('new');
-  const { tutorials, isLoading, isError } = useAll();
-  let content, searched;
+  const [page, setPage] = useState(1);
+  const { tutorials, isLoading, isError } = useAll(page, sort, search);
+  let content;
 
   if (isLoading || isError) {
     content = <Loader />;
   } else {
-    searched = tutorials.filter(
-      (t) =>
-        t.title.toLowerCase().includes(search.toLowerCase()) ||
-        t.by.toLowerCase().includes(search.toLowerCase())
+    content = (
+      <TutorialGroup
+        tutorials={tutorials.data}
+        count={tutorials.count}
+        page={page}
+        onPageChange={setPage}
+      />
     );
-    content = <TutorialGroup tutorials={searched} sort={sort} />;
   }
 
   return (
@@ -84,7 +87,7 @@ export default function Explore() {
         </Grid.Col>
       </Grid>
       {content}
-      {tutorials && searched.length === 0 && (
+      {tutorials?.data.length === 0 && (
         <Alert
           sx={{ width: 'fit-content' }}
           mx="auto"
