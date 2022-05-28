@@ -104,7 +104,15 @@ export default function Create() {
         mt="xl"
         size="md"
         placeholder="Enter some markdown..."
-        label="Tutorial (Markdown enabled)"
+        label={
+          <>
+            Tutorial (
+            <Anchor href="/markdown-guide" target="_blank">
+              Markdown
+            </Anchor>{' '}
+            enabled)
+          </>
+        }
         required
         autosize
         error={body === ''}
