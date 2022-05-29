@@ -14,12 +14,19 @@ export default function Tutorial() {
   const { user } = useUser();
   const { tutorial, isLoading, isError } = useTutorial(router.query.id);
 
-  if (isLoading || isError) {
+  if (isLoading) {
     return (
       <Layout title={`View a Tutorial`}>
         <Loader />
       </Layout>
     );
+  } else if (isError) {
+    return (
+      <Layout title={`Error Loading Tutorial`}>
+        <Title align="center">{isError.status} - {isError.info.error}</Title>
+        <Text align="center" color="dimmed">{isError.message}</Text>
+      </Layout>
+    )
   }
 
   async function deleteTutorial() {
