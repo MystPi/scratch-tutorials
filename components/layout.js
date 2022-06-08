@@ -11,12 +11,15 @@ import {
   Collapse,
   ActionIcon,
   useMantineColorScheme,
+  Affix,
+  Transition,
 } from '@mantine/core';
+import { useWindowScroll } from '@mantine/hooks';
 import { useState } from 'react';
 import Link from 'next/link';
 import Head from 'next/head';
 import useUser from 'lib/useUser';
-import { FiSun, FiMoon } from 'react-icons/fi';
+import { FiSun, FiMoon, FiArrowUp } from 'react-icons/fi';
 
 function NavItem({ children, href, active, ...props }) {
   if (active)
@@ -44,6 +47,7 @@ async function signOut(mutateUser) {
 export default function Layout({ children, tab, title }) {
   const { user, isLoading, mutateUser } = useUser();
   const [opened, setOpened] = useState(false);
+  const [scroll, scrollTo] = useWindowScroll();
   const { colorScheme, toggleColorScheme } = useMantineColorScheme();
   const dark = colorScheme === 'dark';
 
@@ -132,6 +136,21 @@ export default function Layout({ children, tab, title }) {
           {children}
         </AppShell>
       </Container>
+      <Affix position={{ bottom: 20, right: 20 }}>
+        <Transition transition="slide-up" mounted={scroll.y > 0}>
+          {(transitionStyles) => (
+            <ActionIcon
+              color="blue"
+              variant="light"
+              size="lg"
+              style={transitionStyles}
+              onClick={() => scrollTo({ y: 0 })}
+            >
+              <FiArrowUp />
+            </ActionIcon>
+          )}
+        </Transition>
+      </Affix>
     </>
   );
 }
