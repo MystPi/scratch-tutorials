@@ -23,10 +23,14 @@ export default function Tutorial() {
   } else if (isError) {
     return (
       <Layout title={`Error Loading Tutorial`}>
-        <Title align="center">{isError.status} - {isError.info.error}</Title>
-        <Text align="center" color="dimmed">{isError.message}</Text>
+        <Title align="center">
+          {isError.status} - {isError.info.error}
+        </Title>
+        <Text align="center" color="dimmed">
+          {isError.message}
+        </Text>
       </Layout>
-    )
+    );
   }
 
   async function deleteTutorial() {
@@ -69,6 +73,15 @@ export default function Tutorial() {
         <Link href={`/tutorials/user/${tutorial.by}`} passHref>
           <Anchor>{tutorial.by}</Anchor>
         </Link>
+        {user?.isLoggedIn && (
+          <>
+            {' '}
+            &bull;{' '}
+            <Link href="/mods" passHref>
+              <Anchor>Report</Anchor>
+            </Link>
+          </>
+        )}
       </Text>
       <Markdown value={tutorial.contents} />
       <ErrorDialog error={error} />

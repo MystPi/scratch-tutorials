@@ -61,8 +61,8 @@ export default function Guidelines() {
           from using Scratch Tutorials!
         </h2>
         <p>
-          We want this site to be safe for everyone. If you continue to
-          violate these guidelines, you <i>will</i> be banned from using Scratch
+          We want this site to be safe for everyone. If you continue to violate
+          these guidelines, you <i>will</i> be banned from using Scratch
           Tutorials. This includes creating, editing, and viewing tutorials.
         </p>
       </TypographyStylesProvider>
