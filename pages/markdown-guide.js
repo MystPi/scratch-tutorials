@@ -41,7 +41,7 @@ etc.
           {`This is *italic* and this is **bold**. This is ~~strikethrough~~.`}
         </pre>
         <p>
-          Code blocks are also possible, and so is <code>inline code</code>.
+          Code blocks in text-based programming languages, not Scratch, such as JavaScript, are also possible, and so is <code>inline code</code>.
         </p>
         <pre>
           {`Here's some code: \`alert('Hello!');\`
