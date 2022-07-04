@@ -10,7 +10,7 @@
     "format": "prettier --write ."
   },
   "dependencies": {
-    "@mantine/core": "^4.2.11",
+    "@mantine/core": "^4.2.12",
     "@mantine/hooks": "^4.2.4",
     "@mantine/next": "^4.2.11",
     "@supabase/supabase-js": "^1.35.4",
