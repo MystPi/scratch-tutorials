@@ -105,6 +105,7 @@ export default function Layout({ children, tab, title }) {
       <Container p="xl">
         <AppShell
           padding="md"
+          fixed={false}
           header={
             <Header
               sx={{

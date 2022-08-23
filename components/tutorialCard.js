@@ -35,7 +35,7 @@ export default function TutorialCard({ tutorial }) {
         <Text
           my="sm"
           size="sm"
-          color="gray"
+          color="gray.7"
           lineClamp={4}
           style={{ wordBreak: 'normal', overflowWrap: 'anywhere' }}
         >
