@@ -7,7 +7,7 @@ import TutorialGroup from 'components/tutorialGroup';
 
 export default function UserTutorials() {
   const router = useRouter();
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(+router.query.page || 1);
   const user = router.query.user;
   const { tutorials, isLoading, isError } = useUserTutorials(user, page);
   let content;
@@ -20,7 +20,12 @@ export default function UserTutorials() {
         tutorials={tutorials.data}
         count={tutorials.count}
         page={page}
-        onPageChange={setPage}
+        onPageChange={(p) => {
+          router.push(`${router.pathname}?page=${p}`, undefined, {
+            shallow: true,
+          });
+          setPage(p);
+        }}
       />
     );
   }

@@ -8,6 +8,7 @@ import {
   Loader,
 } from '@mantine/core';
 import { useState } from 'react';
+import { useRouter } from 'next/router';
 import { useAll } from 'lib/useTutorial';
 import Layout from 'components/layout';
 import TutorialGroup from 'components/tutorialGroup';
@@ -47,7 +48,8 @@ function SearchInput({ onSearch }) {
 export default function Explore() {
   const [search, setSearch] = useState('');
   const [sort, setSort] = useState('new');
-  const [page, setPage] = useState(1);
+  const router = useRouter();
+  const [page, setPage] = useState(+router.query.page || 1);
   const { tutorials, isLoading, isError } = useAll(page, sort, search);
   let content;
 
@@ -59,7 +61,12 @@ export default function Explore() {
         tutorials={tutorials.data}
         count={tutorials.count}
         page={page}
-        onPageChange={setPage}
+        onPageChange={(p) => {
+          router.push(`${router.pathname}?page=${p}`, undefined, {
+            shallow: true,
+          });
+          setPage(p);
+        }}
       />
     );
   }
