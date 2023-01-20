@@ -13,13 +13,15 @@ import {
   useMantineColorScheme,
   Affix,
   Transition,
+  Alert,
+  Anchor,
 } from '@mantine/core';
 import { useWindowScroll } from '@mantine/hooks';
 import { useState } from 'react';
 import Link from 'next/link';
 import Head from 'next/head';
 import useUser from 'lib/useUser';
-import { FiSun, FiMoon, FiArrowUp } from 'react-icons/fi';
+import { FiSun, FiMoon, FiArrowUp, FiAlertTriangle } from 'react-icons/fi';
 
 function NavItem({ children, href, active, ...props }) {
   if (active)
@@ -133,6 +135,17 @@ export default function Layout({ children, tab, title }) {
           }
         >
           <Collapse in={opened}>{navButtons}</Collapse>
+          <Space h="xl" />
+          <Alert icon={<FiAlertTriangle />} title="EOL update" color="orange">
+            Although it is sad to see it go, Scratch Tutorials has reached its
+            end of life. The site will soon be taken down, so please save
+            tutorials that you don't want to get lost. If you are looking for an
+            alternative,{' '}
+            <Anchor href="https://thedailygobo.scratchtools.app/">
+              The Daily Gobo
+            </Anchor>{' '}
+            is a great site that is similar to Scratch Tutorials.
+          </Alert>
           <Space h="xl" />
           {children}
         </AppShell>
